@@ -23,4 +23,24 @@ public class Flotta {
         }
     }
 
+    public void stampaBattelli() {
+        int i = 1;
+        for(Battello b: battelli) {
+            System.out.println("\nBattello" + i + ": ");
+            String s = b.toString();
+            System.out.println(s);
+            i++;
+        }
+    }
+
+    public boolean controllaNomeBattello(String nome) {
+        for (Battello b : battelli) {
+            if (b.getNomeBattello().equals(nome)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+

@@ -11,14 +11,11 @@ public class Battello {
     private String nomeBattello;
     private int posti;
     private Date data;
-    private String ora;
 
-
-    public Battello(String nomeBattello, int posti, Date data, String ora) {
+    public Battello(String nomeBattello, int posti, Date data) {
         this.nomeBattello = nomeBattello;
         this.posti = posti;
         this.data = data;
-        this.ora = ora;
     }
 
     public Battello() {}
@@ -48,14 +45,6 @@ public class Battello {
         this.data = data;
     }
 
-    public String getOra() {
-        return ora;
-    }
-
-    public void setOra(String ora) {
-        this.ora = ora;
-    }
-
 
     public static Battello creaBattello(Scanner scanner) throws ParseException {
         Battello battello = new Battello();
@@ -64,14 +53,15 @@ public class Battello {
 
         System.out.println("Inserisci i posti massimi del battello");
         battello.posti = scanner.nextInt();
-
-        System.out.println("Inserisci data di partenza nel formato dd/MM/yyyy");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        battello.data = formatter.parse(scanner.nextLine());
-
-        System.out.println("Inserisci l'ora di partenza");
-        battello.ora = scanner.nextLine();
         scanner.nextLine();
+
+        System.out.println("Inserisci data e l'ora di partenza nel formato dd/mm/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm", java.util.Locale.ITALY);
+        battello.data = formatter.parse(scanner.nextLine());
+        System.out.println("Il battello è stato aggiunto alla flotta \n");
+
+        System.out.println("Lista battelli nella flotta:");
+
         return battello;
     }
 
@@ -83,23 +73,18 @@ public class Battello {
         Battello battello = (Battello) o;
         return nomeBattello == battello.nomeBattello &&
                 posti == battello.posti &&
-                Objects.equals(data, battello.data) &&
-                Objects.equals(ora, battello.ora);
+                Objects.equals(data, battello.data);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nomeBattello, posti, data, ora);
+        return Objects.hash(nomeBattello, posti, data);
     }
 
     @Override
     public String toString() {
-        return "Battello{" +
-                "nomeBattello=" + nomeBattello +
-                ", posti=" + posti +
-                ", data=" + data +
-                ", ora='" + ora + '\'' +
-                '}';
+        return "Nome = " + nomeBattello + "\n" +
+                "Posti = " + posti + "\n" +
+                "Data e ora di partenza = " + data + "\n";
     }
-
 }
