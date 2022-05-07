@@ -59,11 +59,9 @@ public class Prenotazione {
 
         System.out.println("Inserisci il cognome del passeggero");
         prenotazione.cognome = scanner.nextLine();
-        scanner.nextLine();
 
         System.out.println("Inserisci il codice fiscale del passeggero");
         prenotazione.codiceFiscale = scanner.nextLine();
-        scanner.nextLine();
 
         System.out.println("La prenotazione è stata effettuata \n");
 

@@ -25,11 +25,16 @@ public class Menu {
                     flotta.aggiungiBattello(b);
                     flotta.stampaBattelli();
                     break;
+
                 case 2: // Rimuovi battello
                     System.out.println("Inserisci il nome del battello");
                     flotta.rimuoviBattelloDaTitolo(scanner.nextLine());
                     break;
-                case 3: // Prenota battello
+
+                case 3: // Lista battelli
+                    break;
+
+                case 4: // Prenota battello
                     Prenotazione p = new Prenotazione();
 
                     System.out.println("Lista battelli disponibili");
@@ -37,17 +42,13 @@ public class Menu {
 
                     System.out.println("Inserisci il nome del battello da prenotare");
                     String nomeBattelloPrenotato = "";
-                    while(!flotta.controllaNomeBattello(nomeBattelloPrenotato)) {
-                        nomeBattelloPrenotato = scanner.nextLine();
-                        if (flotta.controllaNomeBattello(nomeBattelloPrenotato)) {
-                            p.setNomeBattelloPrenotato(nomeBattelloPrenotato);
-                            p.creaPrenotazione(scanner);
-                            .setPosti(b.getPosti() - 1); // TODO: Decremento il numero di posti disponibili e aggiorno la flotta
+                    nomeBattelloPrenotato = scanner.nextLine();
+                    Battello bAggiornato = flotta.getBattello(nomeBattelloPrenotato);
+                    bAggiornato.aggiungiPrenotazione(nomeBattelloPrenotato, p);
+                    
+                    break;
 
-                        } else {
-                            System.out.println("Battello non disponibile");
-                        }
-                    }
+                case 5:
             }
         }
     }

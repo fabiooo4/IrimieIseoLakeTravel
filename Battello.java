@@ -2,6 +2,7 @@ package com.irimie;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
@@ -11,8 +12,10 @@ public class Battello {
     private String nomeBattello;
     private int posti;
     private Date data;
+    private ArrayList<Prenotazione> prenotazioni;
 
     public Battello(String nomeBattello, int posti, Date data) {
+        prenotazioni = new ArrayList<>();
         this.nomeBattello = nomeBattello;
         this.posti = posti;
         this.data = data;
@@ -65,6 +68,26 @@ public class Battello {
         return battello;
     }
 
+    public void aggiungiPrenotazione(String nome, Prenotazione p) {
+        Scanner scanner = new Scanner(System.in);
+        while(!Flotta.controllaNomeBattello(nome)) {
+            if (Flotta.controllaNomeBattello(nome)) {
+                Battello bAggiornato = Flotta.getBattello(nome);
+                p.setNomeBattelloPrenotato(nome);
+                p.creaPrenotazione(scanner);
+                bAggiornato.aggiungiPrenotazione(nome, p);
+            } else {
+                System.out.println("Battello non disponibile");
+            }
+        }
+
+        Flotta.decrementaPosti(nome, p);
+        prenotazioni.add(p);
+    }
+
+    public void listaPrenotazioni(String nome) {
+
+    }
 
     @Override
     public boolean equals(Object o) {
