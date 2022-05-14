@@ -21,7 +21,9 @@ public class Battello {
         this.data = data;
     }
 
-    public Battello() {}
+    public Battello() {
+        prenotazioni = new ArrayList<>();
+    }
 
 
     public String getNomeBattello() {
@@ -63,30 +65,46 @@ public class Battello {
         battello.data = formatter.parse(scanner.nextLine());
         System.out.println("Il battello è stato aggiunto alla flotta \n");
 
-        System.out.println("Lista battelli nella flotta:");
-
         return battello;
     }
 
-    public void aggiungiPrenotazione(String nome, Prenotazione p) {
+    public void aggiungiPrenotazione(Flotta flotta, String nome) {
         Scanner scanner = new Scanner(System.in);
-        while(!Flotta.controllaNomeBattello(nome)) {
-            if (Flotta.controllaNomeBattello(nome)) {
-                Battello bAggiornato = Flotta.getBattello(nome);
-                p.setNomeBattelloPrenotato(nome);
-                p.creaPrenotazione(scanner);
-                bAggiornato.aggiungiPrenotazione(nome, p);
-            } else {
-                System.out.println("Battello non disponibile");
-            }
+        Prenotazione p = new Prenotazione();
+
+        if (flotta.controllaNomeBattello(nome)) {
+            p.setNomeBattelloPrenotato(nome);
+            p.creaPrenotazione(scanner);
+        } else {
+            System.out.println("Battello non disponibile");
         }
 
-        Flotta.decrementaPosti(nome, p);
         prenotazioni.add(p);
     }
 
-    public void listaPrenotazioni(String nome) {
+    public void rimuoviPrenotazione(Flotta flotta, Scanner scanner) {
+        System.out.println("Inserisci il codice fiscale del prenotatore");
+        String codiceFiscale = scanner.nextLine();
+        for(Prenotazione p: prenotazioni) {
+            if(p.getCodiceFiscale().equals(codiceFiscale)) {
+                // TODO stampa battelli prenotati dal prenotatore
+                flotta.getBattello(p.getNomeBattelloPrenotato());
+            } else {
+                System.out.println("Nessuna prenotazione trovata");
+            }
+        }
+    }
 
+    public void listaPrenotazioni(String nome) {
+        int i = 1;
+        if (Flotta.controllaNomeBattello(nome)) {
+            for (Prenotazione p : prenotazioni) {
+                System.out.println("\nPrenotazione" + i + ": ");
+                String s = p.toString();
+                System.out.println(s);
+                i++;
+            }
+        }
     }
 
     @Override

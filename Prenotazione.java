@@ -9,6 +9,9 @@ public class Prenotazione {
     private String nome;
     private String cognome;
     private String codiceFiscale;
+
+
+
     private String nomeBattelloPrenotato;
 
     public Prenotazione(String nome, String cognome, String codiceFiscale) {
@@ -44,28 +47,25 @@ public class Prenotazione {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public void setNomeBattelloPrenotato(String nomeBattelloPrenotato) {
-        this.nomeBattelloPrenotato = nomeBattelloPrenotato;
-    }
-
     public String getNomeBattelloPrenotato() {
         return nomeBattelloPrenotato;
     }
 
-    public static Prenotazione creaPrenotazione(Scanner scanner) {
-        Prenotazione prenotazione = new Prenotazione();
+    public void setNomeBattelloPrenotato(String nomeBattelloPrenotato) {
+        this.nomeBattelloPrenotato = nomeBattelloPrenotato;
+    }
+
+    public void creaPrenotazione(Scanner scanner) {
         System.out.println("Inserisci il nome del passeggero");
-        prenotazione.nome = scanner.nextLine();
+        this.nome = scanner.nextLine();
 
         System.out.println("Inserisci il cognome del passeggero");
-        prenotazione.cognome = scanner.nextLine();
+        this.cognome = scanner.nextLine();
 
         System.out.println("Inserisci il codice fiscale del passeggero");
-        prenotazione.codiceFiscale = scanner.nextLine();
+        this.codiceFiscale = scanner.nextLine();
 
         System.out.println("La prenotazione è stata effettuata \n");
-
-        return prenotazione;
     }
 
     @Override
@@ -83,10 +83,8 @@ public class Prenotazione {
 
     @Override
     public String toString() {
-        return "Prenotazione{" +
-                "nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", codiceFiscale='" + codiceFiscale + '\'' +
-                '}';
+        return "Nome = " + nome + "\n" +
+                "Cognome = " + cognome + "\n" +
+                "Codice fiscale = " + codiceFiscale + "\n";
     }
 }

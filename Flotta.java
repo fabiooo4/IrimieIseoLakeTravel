@@ -33,17 +33,16 @@ public class Flotta {
         }
     }
 
-    public static void decrementaPosti(String nome, Prenotazione prenotaione) {
+    public static boolean decrementaPosti(String nome) {
         for(Battello b: battelli) {
             if(b.getNomeBattello().equals(nome)) {
                 if (b.getPosti() > 0) {
                     b.setPosti(b.getPosti() - 1);
-                } else {
-                    System.out.println("Posti esauriti");
+                    return true;
                 }
-                return;
             }
         }
+        return false;
     }
 
     public void stampaBattelli() {
